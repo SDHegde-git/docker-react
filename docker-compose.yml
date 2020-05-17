@@ -1,0 +1,20 @@
+version: "3"
+services: 
+    react-web:
+        build: 
+            context: .
+            dockerfile: Dockerfile.dev
+        ports: 
+            - "3000:3000"
+        volumes: 
+            - /app/node_modules # this is the indication saying that don't map this to any of the outside folder
+            - .:/app # this indicates right side folder path is the container folder path that need to map/refferd # to folder path mention in right side which is out side of container
+    # this is creating new services for same image to just run test suits 
+    react-test-web:
+        build: 
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes: 
+            - /app/node_modules
+            - .:/app
+        command: ["npm", "run", "test"] #this is the approach to overide default CMD command specified in Dockerfile

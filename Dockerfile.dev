@@ -1,0 +1,14 @@
+# This is the docker file that we use for development
+# so we gave file name extension as .dev
+
+FROM node:alpine
+
+WORKDIR /app
+
+COPY ./package.json ./
+
+RUN npm install
+
+COPY . .
+
+CMD [ "npm", "run", "start" ]
