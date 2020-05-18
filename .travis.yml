@@ -1,0 +1,13 @@
+# sudo: required means we need root access to run all command
+sudo: required 
+services:
+    - docker # it will install copy docker into running container
+
+before_install: # this is section we have serious of command we execute before test run
+    - docker build -t sdhegde/docker-react -f Dockerfile.dev . # we can give our own tag, this will used only inside of this code
+
+# this sction suppose to contain all the command that need to be executed for run tests    
+script:
+    - docker run sdhegde/docker-react npm run test -- --coverage
+
+
